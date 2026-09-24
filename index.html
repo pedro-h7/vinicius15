@@ -292,11 +292,186 @@
   }
   .ja-confirmado.show{display:flex;}
 
+
+  /* ===== TELA DO ENVELOPE ===== */
+  #splash{
+    position:fixed;inset:0;z-index:99999;
+    background:radial-gradient(ellipse 120% 80% at 50% 60%, #1a0d00 0%, #000 70%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:clamp(18px,5vw,28px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  #splash.saindo{opacity:0;transform:scale(1.04);pointer-events:none;}
+
+  /* envelope */
+  .env{
+    position:relative;
+    width:clamp(240px,70vw,320px);
+    cursor:pointer;
+    filter:drop-shadow(0 12px 40px rgba(242,108,30,.4));
+  }
+  /* corpo do envelope */
+  .env-corpo{
+    width:100%;
+    padding-top:62%;      /* proporção 16:10 */
+    background:linear-gradient(160deg,#1c0e03 0%,#2a1505 60%,#1a0d02 100%);
+    border:2px solid rgba(242,108,30,.5);
+    border-radius:8px 8px 12px 12px;
+    position:relative;
+    overflow:hidden;
+  }
+  /* losango inferior (parte de trás do envelope) */
+  .env-corpo::before{
+    content:"";position:absolute;bottom:0;left:0;right:0;
+    height:55%;
+    background:linear-gradient(175deg,#3a1f06 0%,#1a0d02 100%);
+    clip-path:polygon(0 100%, 50% 0, 100% 100%);
+  }
+  /* losango lateral esquerdo */
+  .env-corpo::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg, rgba(242,108,30,.07) 0%, transparent 40%);
+  }
+  .env-aba-esq{
+    position:absolute;bottom:0;left:0;
+    width:51%;height:100%;
+    background:linear-gradient(135deg,#2e1604 0%,#1a0d02 100%);
+    clip-path:polygon(0 0, 100% 50%, 0 100%);
+    border-right:1px solid rgba(242,108,30,.2);
+  }
+  .env-aba-dir{
+    position:absolute;bottom:0;right:0;
+    width:51%;height:100%;
+    background:linear-gradient(225deg,#2e1604 0%,#1a0d02 100%);
+    clip-path:polygon(100% 0, 0 50%, 100% 100%);
+    border-left:1px solid rgba(242,108,30,.2);
+  }
+  /* aba superior (a que "abre") */
+  .env-aba-top{
+    position:absolute;top:0;left:0;right:0;
+    height:55%;
+    background:linear-gradient(160deg,#3d2008 0%,#1e0f03 100%);
+    clip-path:polygon(0 0, 50% 100%, 100% 0);
+    transform-origin:top center;
+    border-bottom:1px solid rgba(242,108,30,.3);
+    transition:transform .7s cubic-bezier(.4,0,.2,1), opacity .4s;
+    z-index:3;
+  }
+  .env-aba-top.aberta{
+    transform:rotateX(180deg);
+    opacity:.4;
+  }
+  /* Lacre / selo */
+  .env-selo{
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:clamp(38px,11vw,48px);
+    height:clamp(38px,11vw,48px);
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#ffb060,#e35d13 60%,#b8480c 100%);
+    border:2px solid rgba(255,255,255,.2);
+    box-shadow:0 3px 12px rgba(0,0,0,.5);
+    display:flex;align-items:center;justify-content:center;
+    font-size:clamp(18px,5vw,22px);
+    z-index:4;
+    transition:transform .3s, opacity .4s;
+  }
+  .env-selo.sumir{transform:translate(-50%,-50%) scale(0);opacity:0;}
+
+  /* carta saindo do envelope */
+  .env-carta{
+    position:absolute;
+    bottom:10%;left:10%;right:10%;
+    height:80%;
+    background:linear-gradient(160deg,#1e0f03,#0f0800);
+    border:1px solid rgba(242,108,30,.4);
+    border-radius:6px;
+    transform:translateY(0);
+    opacity:0;
+    transition:transform .7s .3s cubic-bezier(.2,.8,.3,1), opacity .5s .3s;
+    z-index:2;
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;gap:4px;
+  }
+  .env-carta.saindo{
+    transform:translateY(-110%);
+    opacity:1;
+  }
+  .env-carta-txt{
+    font-family:"Bebas Neue",sans-serif;
+    font-size:clamp(11px,3.5vw,15px);
+    letter-spacing:3px;
+    color:rgba(242,108,30,.7);
+  }
+  .env-carta-num{
+    font-family:"Anton",sans-serif;
+    font-size:clamp(22px,8vw,32px);
+    color:var(--laranja);
+    line-height:1;
+  }
+
+  /* texto e botão abaixo do envelope */
+  .splash-txt{
+    font-family:"Caveat",cursive;
+    font-size:clamp(22px,7vw,30px);
+    color:#eee;
+    text-align:center;
+    line-height:1.3;
+    animation:balanco 2.5s ease-in-out infinite;
+  }
+  @keyframes balanco{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+
+  .splash-btn{
+    margin-top:4px;
+    padding:clamp(13px,4vw,16px) clamp(28px,8vw,40px);
+    border-radius:50px;
+    background:linear-gradient(135deg,var(--laranja),var(--laranja-claro));
+    border:none;cursor:pointer;
+    font-family:"Montserrat",sans-serif;
+    font-size:clamp(14px,4vw,16px);font-weight:800;
+    color:#1a0d00;letter-spacing:.5px;
+    box-shadow:0 8px 24px rgba(242,108,30,.45);
+    transition:transform .15s, box-shadow .2s;
+    animation:pulso-btn 2s infinite;
+  }
+  @keyframes pulso-btn{
+    0%,100%{box-shadow:0 8px 24px rgba(242,108,30,.45);}
+    50%{box-shadow:0 8px 36px rgba(242,108,30,.75);}
+  }
+  .splash-btn:active{transform:scale(.96);}
+
+  /* o convite fica invisível até o envelope abrir */
+  #convite-wrapper{
+    opacity:0;
+    transition:opacity .8s ease;
+  }
+  #convite-wrapper.visivel{opacity:1;}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23e35d13' stroke='%23b8480c' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='48' fill='url(%23grad)'/%3E%3Cdefs%3E%3CradialGradient id='grad' cx='35%25' cy='30%25'%3E%3Cstop offset='0%25' stop-color='%23ffb060'/%3E%3Cstop offset='60%25' stop-color='%23e35d13'/%3E%3Cstop offset='100%25' stop-color='%23b8480c'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cline x1='50' y1='2' x2='50' y2='98' stroke='%23200e00' stroke-width='3'/%3E%3Cline x1='2' y1='50' x2='98' y2='50' stroke='%23200e00' stroke-width='3'/%3E%3Cellipse cx='50' cy='50' rx='48' ry='20' fill='none' stroke='%23200e00' stroke-width='3'/%3E%3Cellipse cx='50' cy='50' rx='20' ry='48' fill='none' stroke='%23200e00' stroke-width='3'/%3E%3C/svg%3E" />
 </head>
 <body>
   
+  <!-- ===== TELA DO ENVELOPE ===== -->
+  <div id="splash">
+    <div class="env" id="envelope">
+      <div class="env-corpo">
+        <div class="env-aba-esq"></div>
+        <div class="env-aba-dir"></div>
+        <div class="env-carta" id="envCarta">
+          <div class="env-carta-txt">CONVITE DE</div>
+          <div class="env-carta-num">15</div>
+          <div class="env-carta-txt">ANOS</div>
+        </div>
+        <div class="env-aba-top" id="envAbaTop"></div>
+        <div class="env-selo" id="envSelo">🏀</div>
+      </div>
+    </div>
+    <div class="splash-txt">Você recebeu<br>um convite especial!</div>
+    <button class="splash-btn" id="btnAbrirEnvelope">✉️ Abrir convite</button>
+  </div>
+
+  <div id="convite-wrapper">
   <canvas id="confete-canvas"></canvas>
   <div class="card">
     <!-- Quadra de basquete em perspectiva (SVG no fundo) -->
@@ -498,6 +673,38 @@
     });
   })();
 
+
+  /* ===== LÓGICA DO ENVELOPE ===== */
+  (function(){
+    var btn    = document.getElementById('btnAbrirEnvelope');
+    var splash = document.getElementById('splash');
+    var aba    = document.getElementById('envAbaTop');
+    var selo   = document.getElementById('envSelo');
+    var carta  = document.getElementById('envCarta');
+    var wrapper= document.getElementById('convite-wrapper');
+
+    btn.addEventListener('click', function(){
+      // 1. Abre a aba
+      aba.classList.add('aberta');
+      selo.classList.add('sumir');
+
+      // 2. Carta sobe
+      setTimeout(function(){ carta.classList.add('saindo'); }, 400);
+
+      // 3. Envelope some, convite aparece
+      setTimeout(function(){
+        splash.classList.add('saindo');
+        wrapper.classList.add('visivel');
+        // dispara confete ao abrir
+        if(typeof dispararConfete === 'function') dispararConfete();
+      }, 1100);
+
+      // 4. Remove o splash do DOM
+      setTimeout(function(){ splash.style.display='none'; }, 1800);
+    });
+  })();
+
 </script>
+  </div><!-- /convite-wrapper -->
 </body>
 </html>
