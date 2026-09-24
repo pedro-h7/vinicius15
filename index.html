@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Convite — Vinicius 15 anos 🏀</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Caveat:wght@600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --laranja:#f26c1e;
+    --laranja-claro:#ff8a3d;
+    --preto:#0c0c0e;
+    --preto2:#161619;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:"Montserrat",sans-serif;
+    background:#000;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:clamp(10px,3vw,28px);
+    min-height:100vh;
+  }
+
+  .card{
+    position:relative;
+    width:100%;
+    max-width:400px;
+    border-radius:clamp(18px,4vw,28px);
+    overflow:hidden;
+    /* Fundo inspirado na imagem: quadra de basquete escura com glow laranja */
+    background:
+      radial-gradient(ellipse 90% 40% at 50% 100%, rgba(80,40,5,.55) 0%, transparent 65%),
+      radial-gradient(ellipse 70% 30% at 50% 0%, rgba(242,108,30,.18) 0%, transparent 55%),
+      radial-gradient(ellipse 110% 60% at 0% 60%, rgba(180,60,0,.13) 0%, transparent 50%),
+      radial-gradient(ellipse 110% 60% at 100% 40%, rgba(180,60,0,.10) 0%, transparent 50%),
+      linear-gradient(175deg, #0f0f12 0%, #0a0a0c 35%, #050505 65%, #0a0600 100%);
+    box-shadow:0 30px 70px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.05);
+  }
+
+  /* Quadra desenhada em SVG no fundo */
+  .quadra-bg{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    opacity:.18;
+  }
+  .quadra-bg svg{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:130%;
+  }
+
+  /* Holofotes no topo */
+  .luzes{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+  .luz{
+    position:absolute;top:-40px;width:22%;height:220px;
+    background:radial-gradient(circle at 50% 0,rgba(255,220,170,.35),transparent 70%);
+    filter:blur(6px);
+    animation:flicker 5s infinite ease-in-out;
+  }
+  .luz:nth-child(1){left:8%;animation-delay:0s;}
+  .luz:nth-child(2){left:40%;animation-delay:1.4s;}
+  .luz:nth-child(3){left:72%;animation-delay:2.6s;}
+  @keyframes flicker{0%,100%{opacity:.5}45%{opacity:.9}60%{opacity:.4}}
+
+  .stroke{
+    position:absolute;height:clamp(6px,1.8vw,8px);border-radius:8px;
+    background:linear-gradient(90deg,transparent,var(--laranja),transparent);
+    opacity:.9;
+  }
+  .stroke.top{top:16%;left:-10%;width:70%;transform:rotate(-4deg);}
+  .stroke.bot{bottom:20%;right:-10%;width:65%;transform:rotate(-3deg);}
+
+  .conteudo{position:relative;z-index:2;padding:clamp(22px,6vw,32px) clamp(18px,5vw,28px);}
+
+  .header{text-align:center;}
+  .kicker{
+    font-family:"Bebas Neue",sans-serif;
+    letter-spacing:clamp(4px,1.6vw,7px);font-size:clamp(15px,4.5vw,21px);color:#eee;
+  }
+  .titulo{
+    font-family:"Caveat",cursive;
+    font-size:clamp(42px,13vw,60px);line-height:.9;color:var(--laranja);
+    text-shadow:2px 3px 0 rgba(0,0,0,.6);
+    margin:-4px 0 2px;
+  }
+
+  .hero{display:flex;align-items:center;justify-content:center;gap:clamp(2px,1.5vw,8px);margin:6px 0 4px;}
+  .num15{
+    font-family:"Anton",sans-serif;
+    font-size:clamp(84px,30vw,128px);line-height:.8;
+    color:var(--laranja);
+    -webkit-text-stroke:clamp(2px,.8vw,3px) #fff;
+    text-shadow:5px 6px 0 rgba(0,0,0,.55);
+    letter-spacing:-4px;
+  }
+  .bola{
+    width:clamp(58px,18vw,84px);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, #ffb060, #e35d13 60%, #b8480c 100%);
+    position:relative;flex-shrink:0;
+    box-shadow:inset -6px -8px 14px rgba(0,0,0,.45), 0 6px 12px rgba(0,0,0,.5);
+    animation:girar 6s linear infinite;
+  }
+  .bola::before,.bola::after{
+    content:"";position:absolute;inset:0;border-radius:50%;
+    border:2px solid rgba(20,10,0,.65);
+  }
+  .bola::before{clip-path:inset(0 47% 0 47%);}
+  .bola::after{clip-path:inset(47% 0 47% 0);}
+  .bola i{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(20,10,0,.55);transform:scaleX(.45);}
+  @keyframes girar{to{transform:rotate(360deg)}}
+
+  .anos{font-family:"Caveat",cursive;font-size:clamp(34px,12vw,48px);color:#fff;text-align:center;margin:-14px 0 0;text-shadow:2px 2px 0 rgba(0,0,0,.5);}
+  .nome{font-family:"Bebas Neue",sans-serif;text-align:center;font-size:clamp(24px,8vw,32px);letter-spacing:4px;color:#fff;margin-top:4px;}
+  .frase{text-align:center;font-size:clamp(13px,3.6vw,15px);color:#cfcfcf;margin:8px 4px 0;line-height:1.5;}
+
+  .infos{margin:16px 0 4px;}
+  .linha{display:flex;gap:clamp(10px,3vw,14px);align-items:flex-start;padding:clamp(9px,2.6vw,11px) 0;border-bottom:1px solid rgba(255,255,255,.07);}
+  .linha:last-child{border-bottom:none;}
+  .ic{
+    width:clamp(36px,10vw,40px);aspect-ratio:1;border-radius:10px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:clamp(17px,5vw,20px);
+    background:linear-gradient(135deg,var(--laranja),var(--laranja-claro));
+  }
+  .rot{font-family:"Bebas Neue",sans-serif;letter-spacing:2px;font-size:clamp(12px,3.6vw,14px);color:var(--laranja-claro);}
+  .val{font-size:clamp(13px,3.9vw,15px);font-weight:600;color:#fff;line-height:1.35;}
+  .val small{display:block;font-size:clamp(11px,3.2vw,13px);font-weight:500;color:#bbb;margin-top:2px;}
+.obs{
+    display:flex;gap:10px;align-items:center;
+    background:rgba(242,108,30,.12);
+    border:1px solid rgba(242,108,30,.35);
+    border-radius:12px;padding:clamp(10px,3vw,12px) clamp(12px,3.5vw,14px);
+    margin:14px 0 4px;font-size:clamp(13px,3.6vw,14px);line-height:1.4;
+  }
+
+  .acoes{display:flex;flex-direction:column;gap:11px;margin-top:18px;}
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    text-decoration:none;border:none;cursor:pointer;
+    padding:clamp(14px,4vw,16px);border-radius:14px;
+    font-size:clamp(14px,4vw,15px);font-weight:800;
+    font-family:"Montserrat",sans-serif;letter-spacing:.5px;
+    transition:transform .12s ease, box-shadow .2s;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-whats{background:#25d366;color:#07310f;box-shadow:0 8px 20px rgba(37,211,102,.35);animation:pulse 2.2s infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 8px 20px rgba(37,211,102,.35)}50%{box-shadow:0 8px 30px rgba(37,211,102,.6)}}
+  .btn-out{background:transparent;color:#fff;border:2px solid var(--laranja);}
+  .btn-pix{background:linear-gradient(135deg,var(--laranja),var(--laranja-claro));color:#1a0d00;}
+
+  .pixbox{display:none;text-align:center;background:rgba(255,255,255,.05);border:1px dashed var(--laranja);border-radius:12px;padding:14px;font-size:14px;}
+  .pixbox.on{display:block;}
+  .pixchave{font-family:"Anton",sans-serif;font-size:clamp(20px,6vw,22px);color:var(--laranja-claro);margin:6px 0;letter-spacing:1px;}
+  .copiado{display:none;color:#25d366;font-weight:700;font-size:13px;margin-top:6px;}
+
+  .assinatura{text-align:center;font-family:"Caveat",cursive;font-size:clamp(20px,6vw,24px);color:var(--laranja-claro);margin-top:20px;transform:rotate(-3deg);}
+
+  .quadra-anim{
+    position:relative;
+    height:60px;
+    margin-top:6px;
+    overflow:visible;
+    /* fade nas laterais e em cima — some suavemente, sem borda visível */
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+                       linear-gradient(to bottom, transparent 0%, black 30%, black 100%);
+    -webkit-mask-composite:destination-in;
+    mask-image:linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+               linear-gradient(to bottom, transparent 0%, black 30%, black 100%);
+    mask-composite:intersect;
+  }
+  .bounce{
+    position:absolute;bottom:0;left:10%;width:clamp(28px,8vw,34px);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 32% 28%,#ffb060,#e35d13 60%,#b8480c 100%);
+    box-shadow:inset -4px -5px 8px rgba(0,0,0,.4);
+    animation:quicar 1.6s infinite ease-in, andar 8s infinite linear;
+  }
+  @keyframes quicar{0%,100%{transform:translateY(-38px) scaleY(1)}45%{transform:translateY(0) scaleY(.85)}55%{transform:translateY(0) scaleY(.85)}}
+  @keyframes andar{0%{left:5%}50%{left:82%}100%{left:5%}}
+
+  @media(min-width:1024px){
+    body{padding:0;overflow:hidden;}
+    .card{
+      max-width:none;
+      width:100vw;
+      height:100vh;
+      border-radius:0;
+      box-shadow:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .stroke.top{top:20%;width:55%;}
+    .stroke.bot{bottom:16%;width:50%;}
+
+    .conteudo{
+      width:100%;
+      height:100%;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      grid-template-rows:repeat(5, auto);
+      align-content:center;
+      justify-content:center;
+      column-gap:clamp(48px,7vw,110px);
+      row-gap:0;
+      padding:clamp(24px,4vh,50px) clamp(48px,7vw,120px);
+      max-width:1360px;
+      margin:0 auto;
+    }
+
+    .header{grid-column:1;grid-row:1;align-self:end;text-align:left;}
+    .hero{grid-column:1;grid-row:2;justify-content:flex-start;margin:2px 0 0;}
+    .anos{grid-column:1;grid-row:3;text-align:left;margin:-14px 0 0;}
+    .nome{grid-column:1;grid-row:4;text-align:left;margin-top:6px;}
+    .frase{grid-column:1;grid-row:5;text-align:left;margin:14px 0 0;font-size:15px;max-width:420px;}
+
+    .infos{grid-column:2;grid-row:1 / 3;align-self:end;margin:0;}
+    .obs{grid-column:2;grid-row:3;margin:16px 0 0;}
+    .acoes{grid-column:2;grid-row:4 / 6;margin:16px 0 0;gap:10px;align-self:start;}
+
+    .assinatura,.quadra-anim{display:none;}
+
+    .kicker{font-size:clamp(16px,1.8vw,22px);letter-spacing:7px;}
+    .titulo{font-size:clamp(46px,5.5vw,68px);}
+    .num15{font-size:clamp(90px,10vw,130px);}
+    .bola{width:clamp(70px,7vw,90px);}
+    .anos{font-size:clamp(40px,4.5vw,56px);}
+    .nome{font-size:clamp(30px,3.2vw,40px);letter-spacing:5px;}
+    .infos .linha{padding:clamp(7px,1.1vh,10px) 0;}
+    .infos .val{font-size:clamp(15px,1.1vw,17px);}
+    .infos .rot{font-size:13px;}
+    .ic{width:42px;font-size:20px;}
+    .btn{padding:clamp(11px,1.4vh,14px);font-size:14px;}
+    .pixchave{font-size:20px;}
+  }
+
+  @media(min-width:1700px){
+    .conteudo{column-gap:120px;}
+  }
+
+  /* ===== ANIMAÇÕES DE ENTRADA ===== */
+  @keyframes slideUp{
+    from{opacity:0;transform:translateY(40px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  @keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+  }
+  .card{
+    animation:slideUp .7s cubic-bezier(.22,.68,0,1.2) both;
+  }
+  .header{animation:slideUp .6s .15s cubic-bezier(.22,.68,0,1.2) both;}
+  .hero{animation:slideUp .6s .3s cubic-bezier(.22,.68,0,1.2) both;}
+  .anos,.nome{animation:slideUp .5s .42s cubic-bezier(.22,.68,0,1.2) both;}
+  .frase{animation:fadeIn .6s .55s both;}
+  .infos{animation:slideUp .5s .65s cubic-bezier(.22,.68,0,1.2) both;}
+  .obs{animation:fadeIn .5s .8s both;}
+  .acoes{animation:slideUp .5s .9s cubic-bezier(.22,.68,0,1.2) both;}
+
+  /* ===== CANVAS DE CONFETE ===== */
+  #confete-canvas{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+  }
+
+  /* ===== CONFIRMAÇÃO JÁ FEITA ===== */
+  .ja-confirmado{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:rgba(37,211,102,.15);
+    border:1px solid rgba(37,211,102,.5);
+    border-radius:14px;
+    padding:clamp(14px,4vw,16px);
+    font-size:clamp(13px,3.8vw,15px);
+    font-weight:700;
+    color:#25d366;
+    text-align:center;
+    animation:fadeIn .4s both;
+  }
+  .ja-confirmado.show{display:flex;}
+
+</style>
+</head>
+<body>
+  
+  <canvas id="confete-canvas"></canvas>
+  <div class="card">
+    <!-- Quadra de basquete em perspectiva (SVG no fundo) -->
+    <div class="quadra-bg">
+      <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#f26c1e" stroke-width="1.5">
+        <!-- linhas de perspectiva do piso -->
+        <line x1="200" y1="60" x2="-60" y2="320" stroke-width="1"/>
+        <line x1="200" y1="60" x2="460" y2="320" stroke-width="1"/>
+        <line x1="0" y1="320" x2="400" y2="320"/>
+        <line x1="200" y1="60" x2="-20" y2="260"/>
+        <line x1="200" y1="60" x2="60" y2="320"/>
+        <line x1="200" y1="60" x2="140" y2="320"/>
+        <line x1="200" y1="60" x2="260" y2="320"/>
+        <line x1="200" y1="60" x2="340" y2="320"/>
+        <line x1="200" y1="60" x2="420" y2="260"/>
+        <!-- linhas horizontais -->
+        <line x1="30" y1="180" x2="370" y2="180"/>
+        <line x1="10" y1="250" x2="390" y2="250"/>
+        <!-- círculo central em perspectiva -->
+        <ellipse cx="200" cy="185" rx="70" ry="20"/>
+        <!-- garrafão -->
+        <line x1="120" y1="320" x2="140" y2="180"/>
+        <line x1="280" y1="320" x2="260" y2="180"/>
+        <line x1="140" y1="180" x2="260" y2="180"/>
+        <!-- aro e tabela -->
+        <ellipse cx="200" cy="90" rx="24" ry="6" stroke-width="2"/>
+        <rect x="174" y="60" width="52" height="30" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <div class="luzes"><div class="luz"></div><div class="luz"></div><div class="luz"></div></div>
+    <div class="stroke top"></div>
+    <div class="stroke bot"></div>
+
+    <div class="conteudo">
+      <div class="header">
+        <div class="kicker">CONVITE DE</div>
+        <div class="titulo">Aniversário</div>
+      </div>
+
+      <div class="hero">
+        <div class="num15">15</div>
+        <div class="bola"><i></i></div>
+      </div>
+      <div class="anos">anos</div>
+      <div class="nome">VINICIUS</div>
+      <p class="frase">Bora comemorar essa data comigo? Cola lá que a festa vai ser braba! 🏀</p>
+
+      <div class="infos">
+        <div class="linha">
+          <div class="ic">📅</div>
+          <div><div class="rot">DATA</div><div class="val">Sábado, 05 de dezembro de 2026</div></div>
+        </div>
+        <div class="linha">
+          <div class="ic">🕚</div>
+          <div><div class="rot">HORÁRIO</div><div class="val">A partir das 11h</div></div>
+        </div>
+        <div class="linha">
+          <div class="ic">📍</div>
+          <div>
+            <div class="rot">LOCAL</div>
+            <div class="val">
+              Chácara Morada do Sabiá
+              <small>Rua João de Túlio, 8E — Franco da Rocha</small>
+            </div>
+          </div>
+        </div>
+        <div class="linha">
+          <div class="ic">🎁</div>
+          <div>
+            <div class="rot">PRESENTE</div>
+            <div class="val">
+              Camiseta tamanho G ou GG
+              <small>Bermudas tamanho 42 ou 44</small>
+            </div>
+          </div>
+        </div>
+
+      <div class="obs">🏊 <span><b>Tem piscina no local!</b> Se quiser dar um mergulho, traga o traje de banho.</span></div>
+
+      <div class="acoes">
+                <div class="ja-confirmado" id="jaConfirmado">
+          ✅ Você já confirmou sua presença! Te esperamos lá 🏀
+        </div>
+        <a class="btn btn-whats" id="btnConfirmar" href="#">🏀 CONFIRMAR PRESENÇA</a>
+
+        <button class="btn btn-pix" onclick="togglePix()">💸 Presentear via Pix</button>
+        <div class="pixbox" id="pixbox">
+          Chave Pix (celular)
+          <div class="pixchave">11988891252</div>
+          <button class="btn btn-out" style="padding:10px;font-size:13px;" onclick="copiarPix()">📋 Copiar chave</button>
+          <div class="copiado" id="copiado">Copiado! ✅</div>
+        </div>
+
+        <a class="btn btn-out" target="_blank"
+           href="https://www.google.com/maps/place/R.+Jo%C3%A3o+de+T%C3%BAlio,+8e,+Franco+da+Rocha+-+SP/@-23.3070884,-46.6852167,14z/data=!4m6!3m5!1s0x94cee5e57da345cd:0x8a2d03c18b67dc40!8m2!3d-23.3071316!4d-46.6821959!16s%2Fg%2F11v12wn981?entry=ttu&g_ep=EgoyMDI2MDkyMi4wIKXMDSoASAFQAw%3D%3D">🗺️ Ver local no mapa</a>
+      </div>
+
+      <div class="assinatura">Te espero na quadra! 🧡</div>
+      <div class="quadra-anim"><div class="bounce"></div></div>
+    </div>
+  </div>
+
+<script>
+  var numeroConfirmacao = "5511947832317";
+  var chavePix = "11988891252";
+
+  var msg = "Fala! Confirmo minha presença no aniversário de 15 anos do Vinicius (05/12/2026, 11h). Tô dentro! 🏀🎉";
+  document.getElementById("btnConfirmar").href =
+    "https://wa.me/" + numeroConfirmacao + "?text=" + encodeURIComponent(msg);
+
+  function togglePix(){ document.getElementById("pixbox").classList.toggle("on"); }
+  function copiarPix(){
+    navigator.clipboard.writeText(chavePix).then(function(){
+      var c = document.getElementById("copiado");
+      c.style.display = "block";
+      setTimeout(function(){ c.style.display = "none"; }, 2500);
+    }).catch(function(){ alert("Chave Pix: " + chavePix); });
+  }
+
+  /* ===== CONFIRMAÇÃO + CONFETE ===== */
+  // Verifica se já confirmou
+  if(localStorage.getItem('vinicius15_confirmado')){
+    document.getElementById('jaConfirmado').classList.add('show');
+    document.getElementById('btnConfirmar').style.display = 'none';
+  }
+
+  // Ao clicar em confirmar: salva + dispara confete
+  document.getElementById('btnConfirmar').addEventListener('click', function(){
+    localStorage.setItem('vinicius15_confirmado', '1');
+  });
+
+  /* ===== CONFETE ===== */
+  (function(){
+    var canvas = document.getElementById('confete-canvas');
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var running = false;
+
+    function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+
+    var cores = ['#f26c1e','#ff8a3d','#ffb060','#ffffff','#ffdd99','#e35d13'];
+
+    function criarParticulas(){
+      for(var i=0; i<120; i++){
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: -10 - Math.random() * 200,
+          w: 6 + Math.random() * 8,
+          h: 3 + Math.random() * 5,
+          cor: cores[Math.floor(Math.random() * cores.length)],
+          rot: Math.random() * Math.PI * 2,
+          vx: (Math.random() - .5) * 3,
+          vy: 2 + Math.random() * 4,
+          vr: (Math.random() - .5) * .2,
+          alpha: 1
+        });
+      }
+    }
+
+    function loop(){
+      if(!running) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      var vivos = false;
+      particles.forEach(function(p){
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        if(p.y > canvas.height * .7) p.alpha -= .02;
+        if(p.alpha <= 0) return;
+        vivos = true;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.cor;
+        ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        ctx.restore();
+      });
+      particles = particles.filter(function(p){ return p.alpha > 0; });
+      if(vivos){ requestAnimationFrame(loop); } else { running = false; }
+    }
+
+    window.dispararConfete = function(){
+      criarParticulas();
+      if(!running){ running = true; loop(); }
+    };
+
+    // Dispara ao carregar a página pela primeira vez
+    window.addEventListener('load', function(){
+      setTimeout(dispararConfete, 800);
+    });
+
+    // Dispara também ao clicar em confirmar
+    document.getElementById('btnConfirmar').addEventListener('click', function(){
+      setTimeout(dispararConfete, 200);
+    });
+  })();
+
+</script>
+</body>
+</html>
